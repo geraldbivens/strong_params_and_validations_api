@@ -9,9 +9,19 @@ class UsersController < ApplicationController
         render json: @user
     end
 
+    # def create
+    #     @user = User.create(user_params)
+    #     render json: @user
+    # end
+
+    # Basic example of error handling
     def create
-        @user = User.create(user_params)
-        render json: @user
+        @user = User.new(user_params)
+        if @user.save
+            render json: @user
+        else
+            render status: 418
+        end
     end
 
     def update
